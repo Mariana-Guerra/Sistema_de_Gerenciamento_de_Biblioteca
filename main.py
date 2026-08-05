@@ -24,4 +24,45 @@ def salvar_livros():
         escritor.writeheader()
         escritor.writerows(livros)
 
-        
+        # FUNÇÕES PRINCIPAIS
+
+def cadastrar_livro():
+    """Cadastra um novo livro e retorna True se conseguiu"""
+    titulo = input("Título: ").strip()
+    autor = input("Autor: ").strip()
+    ano = input("Ano de publicação: ").strip()
+    isbn = input("ISBN: ").strip()
+
+    # Verifica duplicidade pelo ISBN
+    for livro in livros:
+        if livro["isbn"] == isbn:
+            print("\nErro: Este livro já está cadastrado!\n")
+            return False
+
+    novo_livro = {
+        "titulo": titulo,
+        "autor": autor,
+        "ano": ano,
+        "isbn": isbn,
+        "status": "Disponível"
+    }
+    livros.append(novo_livro)
+    salvar_livros()
+    print("\nLivro cadastrado com sucesso!\n")
+    return True
+
+def emprestar_livro():
+    """Registra empréstimo de um livro"""
+    titulo = input("Digite o título do livro para emprestar: ").strip()
+    for livro in livros:
+        if livro["titulo"].lower() == titulo.lower():
+            if livro["status"] == "Disponível":
+                livro["status"] = "Emprestado"
+                salvar_livros()
+                print("Livro emprestado com sucesso!")
+                return True
+            else:
+                print("Este livro já está emprestado.")
+                return False
+    print("Livro não encontrado.")
+    return False
