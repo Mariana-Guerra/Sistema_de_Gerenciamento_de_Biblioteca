@@ -66,3 +66,25 @@ def emprestar_livro():
                 return False
     print("Livro não encontrado.")
     return False
+
+def devolver_livro():
+    """Registra devolução de um livro"""
+    titulo = input("Digite o título do livro para devolver: ").strip()
+    for livro in livros:
+        if livro["titulo"].lower() == titulo.lower():
+            if livro["status"] == "Emprestado":
+                livro["status"] = "Disponível"
+                salvar_livros()
+                print("Livro devolvido com sucesso!")
+                return True
+            else:
+                print("Este livro já está disponível.")
+                return False
+    print("Livro não encontrado.")
+    return False
+
+def listar_livros():
+    """Lista todos os livros cadastrados"""
+    if not livros:
+        print("\nNenhum livro cadastrado.\n")
+        return
