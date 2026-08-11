@@ -147,3 +147,36 @@ def ordenar_livros():
     salvar_livros() # salva a nova ordem
     print("Livros ordenados!")
     listar_livros()
+
+    # MENU PRINCIPAL
+
+def menu():
+    """Controla o fluxo do programa"""
+    carregar_livros()
+
+    while True:
+        print("\n===== SISTEMA DE GERENCIAMENTO DE BIBLIOTECA =====")
+        print("1 - Cadastrar livro")
+        print("2 - Emprestar livro")
+        print("3 - Devolver livro")
+        print("4 - Listar livros")
+        print("5 - Buscar livro")
+        print("6 - Ordenar livros")
+        print("0 - Sair")
+
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1": cadastrar_livro()
+        elif opcao == "2": emprestar_livro()
+        elif opcao == "3": devolver_livro()
+        elif opcao == "4": listar_livros()
+        elif opcao == "5": buscar_livro()
+        elif opcao == "6": ordenar_livros()
+        elif opcao == "0":
+            print("\nEncerrando sistema. Até logo!")
+            break
+        else:
+            print("Opção inválida! Tente novamente.")
+
+if __name__ == "__main__":
+    menu()
