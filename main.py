@@ -88,4 +88,26 @@ def listar_livros():
     if not livros:
         print("\nNenhum livro cadastrado.\n")
         return
-    
+
+    print("\n===== ACERVO DA BIBLIOTECA =====")
+    for livro in livros:
+        print(f"Título: {livro['titulo']}")
+        print(f"Autor: {livro['autor']}")
+        print(f"Ano: {livro['ano']}")
+        print(f"ISBN: {livro['isbn']}")
+        print(f"Status: {livro['status']}")
+        print("-" * 30)
+
+def buscar_livro():
+    """Busca livro por título ou autor"""
+    termo = input("Digite título ou autor para buscar: ").strip().lower()
+    resultados = [l for l in livros if termo in l["titulo"].lower() or termo in l["autor"].lower()]
+
+    if not resultados:
+        print("Nenhum livro encontrado.")
+        return []
+
+    print(f"\n{len(resultados)} livro(s) encontrado(s):")
+    for livro in resultados:
+        print(f"- {livro['titulo']} | {livro['autor']} | {livro['status']}")
+    return resultados
