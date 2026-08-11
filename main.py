@@ -111,3 +111,39 @@ def buscar_livro():
     for livro in resultados:
         print(f"- {livro['titulo']} | {livro['autor']} | {livro['status']}")
     return resultados
+
+def ordenar_livros():
+    """Ordena a listagem de livros"""
+    print("\nOrdenar por:")
+    print("1 - Título")
+    print("2 - Autor")
+    print("3 - Ano")
+    op = input("Escolha: ")
+
+    if op == "1":
+        # Ordenar por Título - método da bolha
+        for i in range(len(livros)):
+            for j in range(0, len(livros) - i - 1):
+                if livros[j]["titulo"] > livros[j + 1]["titulo"]:
+                    livros[j], livros[j + 1] = livros[j + 1], livros[j]
+
+    elif op == "2":
+        # Ordenar por Autor
+        for i in range(len(livros)):
+            for j in range(0, len(livros) - i - 1):
+                if livros[j]["autor"] > livros[j + 1]["autor"]:
+                    livros[j], livros[j + 1] = livros[j + 1], livros[j]
+
+    elif op == "3":
+        # Ordenar por Ano
+        for i in range(len(livros)):
+            for j in range(0, len(livros) - i - 1):
+                if livros[j]["ano"] > livros[j + 1]["ano"]:
+                    livros[j], livros[j + 1] = livros[j + 1], livros[j]
+    else:
+        print("Opção inválida.")
+        return
+
+    salvar_livros() # salva a nova ordem
+    print("Livros ordenados!")
+    listar_livros()
